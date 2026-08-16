@@ -1,25 +1,28 @@
 """
-Compare temperature and random seed.
-
-Requires: OPENAI_API_KEY
-Run: uv run 04_temperature_and_seed.py
+n, temperature and seed
 """
 
-import os
 from dotenv import load_dotenv
 from openai import OpenAI
+
+MODEL = "gpt-4o-mini"  # gpt-5.6-luna does not support some parameters
 
 load_dotenv()
 
 client = OpenAI()
-model = os.getenv("OPENAI_SAMPLING_MODEL", "gpt-4o-mini")
-prompt = "Invent a short name for a robot that sorts packages."
-
-for temperature, seed in [(0, 1), (1, 1), (1, 2)]:
+for temperature in [0.0, 1.0, 2.0]:
+    print(f"\nTemperature: {temperature}")
     response = client.chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": prompt}],
-        temperature=temperature,
-        seed=seed,
+        model=MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": "In five words, what is the weather like in July in Paris?"
+            }
+        ],
+        n = 5,
+        temperature = temperature,
+        seed = 42
     )
-    print(f"temperature={temperature}, seed={seed}: {response.choices[0].message.content}")
+    for choice in response.choices:
+        print('\t' + choice.message.content)

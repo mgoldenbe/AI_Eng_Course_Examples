@@ -1,0 +1,13 @@
+[tool.uv]
+link-mode = "copy"
+
+[project]
+name = "typer-templates"
+version = "0.1.0"
+description = "Small, independently runnable examples of Typer capabilities."
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "rich>=13.7,<15",
+    "typer>=0.20,<1",
+]

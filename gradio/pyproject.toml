@@ -1,0 +1,14 @@
+[project]
+name = "gradio-examples"
+version = "0.1.0"
+description = "Self-contained examples for Part 4: Building Web Interfaces with Gradio"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.128,<1",
+    "gradio>=6.5.1,<7",
+    "lorem-text>=3.0",
+    "uvicorn[standard]>=0.48,<1",
+]
+
+[tool.uv]
+package = false
